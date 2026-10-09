@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="cs"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vzájemné působení částic — fyzika</title><style>:root{--ink:#142139;--bg:#f4f7fc;--border:#dce4f0;--blue:#2858cb;--red:#dc3545;--green:#16866d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Arial,sans-serif;line-height:1.55}header{background:linear-gradient(115deg,#172c65,#5343a4);color:#fff;padding:32px 18px}header>div,main{max-width:1060px;margin:auto}h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.2;margin:6px 0}main{padding:18px 14px 50px}.card{background:#fff;border:1px solid var(--border);padding:22px;border-radius:16px;margin:16px 0;box-shadow:0 4px 16px #1d315012}h2{margin:0 0 14px;font-size:1.35rem}.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tile{border-radius:12px;padding:15px;background:#f1f6ff}.tile.red{background:#fff1f1}li{margin:6px 0}button{cursor:pointer;border:0;padding:10px 14px;border-radius:9px;background:var(--blue);color:white;font-weight:700}button.muted{background:#e6edf6;color:#24324b}input[type=range]{width:100%;accent-color:var(--blue)}.viz{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}.atoms{height:175px;position:relative;background:#f5f8ff;border-radius:15px;overflow:hidden}.atom{position:absolute;top:56px;width:66px;height:66px;border-radius:50%;box-shadow:inset -13px -13px 17px #0003,0 4px 14px #0002;background:radial-gradient(circle at 28% 24%,#a9ddff,#3384d0 65%,#1a4c94)}.atom.b{background:radial-gradient(circle at 28% 24%,#dbb7ff,#9064dc 65%,#57329b)}.distance{position:absolute;top:137px;left:0;right:0;text-align:center;font-weight:700;color:#64748b;font-size:.88rem}.result{padding:13px;background:#f5f8ff;border-radius:12px;margin-top:12px}.plot{width:100%;height:280px;border-radius:12px;background:#fbfcff;border:1px solid #e2e8f0}.small{font-size:.91rem;color:#60708b}.legend{display:flex;gap:15px;flex-wrap:wrap}.dot{display:inline-block;height:10px;width:10px;border-radius:50%;margin-right:5px}.q{padding:15px 0;border-top:1px solid var(--border)}.opt{display:block;padding:9px 12px;margin:7px 0;border:1px solid #dfe5ee;border-radius:9px;cursor:pointer}.opt:has(input:checked){background:#eff5ff;border-color:#87aaff}.feedback{font-weight:700;margin:8px 0}.correct{color:#148054}.wrong{color:#bb283a}#score{font-weight:700;font-size:1.2rem}a{color:#274fb7}@media(max-width:720px){.cols,.viz{grid-template-columns:1fr}.card{padding:16px}}</style></head><body>
+<header><div><div>MOLEKULOVÁ FYZIKA · KAPITOLA 2</div><h1>Vzájemné působení částic</h1><div>Výklad, interaktivní model, graf a procvičování</div></div></header><main>
+<section class="card"><h2>1. Přitažlivé a odpudivé síly</h2><p>Částice látek na sebe působí silami. O tom, zda převažuje přitahování, nebo odpuzování, rozhoduje jejich <b>vzájemná vzdálenost</b>.</p><div class="cols"><div class="tile"><h3>↔ Přitažlivé síly</h3><p>Udržují částice pohromadě a brání jejich oddalování.</p><ul><li>pevné předměty drží pohromadě</li><li>pevný předmět se brání natažení</li><li>kapky vody drží pohromadě</li><li>kapalina přilne k povrchu</li></ul></div><div class="tile red"><h3>→ ← Odpudivé síly</h3><p>Brání přílišnému přiblížení částic.</p><ul><li>kapaliny jsou málo stlačitelné</li><li>pevné těleso se brání stlačování</li><li>pružný míček se odráží od podložky</li></ul></div></div></section>
+<section class="card"><h2>2. Skutečné jednotky: dva atomy a jejich vzájemná síla</h2><p>Vyber stejný druh dvou atomů vzácného plynu. Vzdálenost je v <b>nm</b>, síla v <b>pN</b> (1 pN = 10⁻¹² N). Výsledná síla je vypočtena z Lennardova–Jonesova potenciálu s publikovanými parametry.</p>
+<div style="margin:12px 0"><label for="element"><b>Prvek: </b></label> <select id="element" style="padding:9px;border-radius:9px;border:1px solid #bac8db;font-size:1rem"><option value="He">Helium (He)</option><option value="Ne">Neon (Ne)</option><option selected value="Ar">Argon (Ar)</option><option value="Kr">Krypton (Kr)</option><option value="Xe">Xenon (Xe)</option></select></div>
+<div class="viz"><div><div class="atoms" id="atoms"><div class="atom" id="a"></div><div class="atom b" id="b"></div><div class="distance" id="distance"></div></div><label for="r"><b>Vzdálenost středů atomů</b></label><input id="r" min="0" max="1000" step="1" type="range" value="350"><div class="result" id="explain" aria-live="polite"></div><p class="small" id="params"></p><button class="muted" id="equilibrium">Nastavit rovnovážnou vzdálenost r₀</button></div>
+<div><canvas class="plot" id="chart" role="img" aria-label="Graf vzájemné síly dvou atomů v pikonewtonech podle vzdálenosti v nanometrech"></canvas><p class="small">Vodorovná osa: vzdálenost r (nm). Svislá osa: síla F (pN). Kladná = odpuzování, záporná = přitahování. Křivka je výpočtem z modelu, ne přímým měřením.</p></div></div>
+<p class="small">Používáme <b>F(r) = 24ε/r · [2(σ/r)¹² − (σ/r)⁶]</b>; ε = k<sub>B</sub>·(ε/k<sub>B</sub>), r₀ = 2<sup>1/6</sup>σ. Parametry σ a ε/k<sub>B</sub> převzaty ze studie ACS (Tang–Toennies). Jde o přibližný klasický dvouatomový model; zejména pro helium mohou být kvantové vlivy významné a parametry se mezi modely liší.</p>
+<p class="small"><b>Zdroj parametrů:</b> <a href="https://pubs.acs.org/doi/10.1021/acs.jpcb.5b06389" target="_blank" rel="noopener">Journal of Physical Chemistry B – Noble Gas Lennard-Jones Potentials, tabulka 2</a>.</p></section>
+<section class="card"><h2>3. Rovnovážná vzdálenost</h2><p><b>r₀</b> je vzdálenost, při které je výsledná vzájemná síla nulová. Při <b>r &lt; r₀</b> se částice odpuzují, při <b>r &gt; r₀</b> se přitahují. Ve velkých vzdálenostech vzájemná síla slábne k nule.</p><p>Na křivce síly vzniká v přitažlivé oblasti minimum (největší velikost přitažlivé síly), po němž přitažlivé působení opět slábne.</p></section>
+<section class="card"><h2>4. Potenciální energie a vazby</h2><p>Částice na sebe silově působí, proto mají potenciální energii závislou na vzdálenosti. V <b>rovnovážné vzdálenosti je potenciální energie nejnižší</b>. Jestliže se vázané částice mají trvale oddělit, musíme dodat energii.</p><p>Potenciální energii často volíme jako nulovou ve velké vzdálenosti částic. V rovnovážné poloze pak vychází <b>záporná</b>.</p><h3>Proč některé chemické reakce potřebují zahřátí?</h3><p>S rostoucí teplotou roste průměrná kinetická energie částic; při srážkách tak více částic dokáže překonat potřebnou energetickou bariéru.</p></section>
+<section class="card"><h2>5. Procvičování</h2><p>Vyber odpověď. Po vyhodnocení u každé otázky uvidíš vysvětlení.</p><div id="questions"></div><button onclick="check()">Vyhodnotit</button> <button class="muted" onclick="resetQuiz()">Zkusit znovu</button><p id="score" aria-live="polite"></p></section>
+<section class="card"><h2>Zdroje</h2><p>Výklad je uspořádaný podle kapitoly <a href="https://www.realisticky.cz/ucebnice/02%20Fyzika%20S%C5%A0/02%20Molekulov%C3%A1%20fyzika%20a%20termika/01%20Z%C3%A1kladn%C3%AD%20poznatky%20molekulov%C3%A9%20fyziky/02%20Vz%C3%A1jemn%C3%A9%20p%C5%AFsoben%C3%AD%20%C4%8D%C3%A1stic.pdf" target="_blank" rel="noopener">Vzájemné působení částic – Realisticky.cz</a>. Graf je zjednodušená výuková ilustrace.</p></section></main>
+<script>
+const values={He:{name:'Helium',sigma:2.967,eps:10.8},Ne:{name:'Neon',sigma:3.087,eps:42.25},Ar:{name:'Argon',sigma:3.759,eps:143.2},Kr:{name:'Krypton',sigma:4.012,eps:199.9},Xe:{name:'Xenon',sigma:4.063,eps:282.35}};
+const kB=1.380649e-23;
+const rInput=document.getElementById('r'),elInput=document.getElementById('element');
+const fmt=(n,d=3)=>n.toLocaleString('cs-CZ',{maximumFractionDigits:d,minimumFractionDigits:d});
+const getData=()=>values[elInput.value];
+const r0=()=>Math.pow(2,1/6)*getData().sigma*.1; // Å → nm
+const limits=()=>[.90*r0(),2.4*r0()];
+const rNow=()=>{const [lo,hi]=limits();return lo+(hi-lo)*(+rInput.value/1000)};
+function force(r){const v=getData(),s=v.sigma*.1,epsilon=v.eps*kB,x=s/r;return 24*epsilon/(r*1e-9)*(2*x**12-x**6)*1e12;} // pN
+function update(){
+ const r=rNow(),equil=r0(),F=force(r),w=document.getElementById('atoms').clientWidth;
+ const [lo,hi]=limits(),span=68+(r-lo)/(hi-lo)*Math.max(1,w-170),left=w/2-span/2;
+ document.getElementById('a').style.left=(left-33)+'px';document.getElementById('b').style.left=(left+span-33)+'px';
+ document.getElementById('distance').textContent='r = '+fmt(r)+' nm';
+ let label=F>1e-5?'<b style="color:#b6283e">Odpuzování</b>':F< -1e-5?'<b style="color:#2858cb">Přitahování</b>':'<b style="color:#16866d">Rovnováha</b>';
+ document.getElementById('explain').innerHTML=label+'<br><b>F = '+fmt(F,4)+' pN = '+(F*1e-12).toExponential(4)+' N</b><br>r = '+fmt(r,4)+' nm; r/r₀ = '+fmt(r/equil,3);
+ const v=getData();document.getElementById('params').innerHTML='Parametry pro '+v.name+': σ = '+fmt(v.sigma,3)+' Å; ε/k<sub>B</sub> = '+fmt(v.eps,2)+' K; <b>r₀ = '+fmt(equil,4)+' nm</b>.';
+ draw(r);
+}
+function draw(r){
+ const canvas=document.getElementById('chart'),rect=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+ canvas.width=Math.max(1,Math.round(rect.width*dpr));canvas.height=Math.max(1,Math.round(rect.height*dpr));
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);
+ const w=rect.width,h=rect.height,L=60,T=22,R=14,B=43,pw=w-L-R,ph=h-T-B;
+ const [minR,maxR]=limits(),maxF=force(minR)*1.07;
+ let minF=0;for(let i=0;i<=550;i++)minF=Math.min(minF,force(minR+(maxR-minR)*i/550));minF*=1.28;
+ const X=v=>L+(v-minR)/(maxR-minR)*pw,Y=v=>T+(maxF-v)/(maxF-minF)*ph;
+ ctx.clearRect(0,0,w,h);ctx.font='11px system-ui';ctx.textBaseline='middle';
+ const fTicks=[minF,minF/2,0,maxF/2,maxF];
+ fTicks.forEach(v=>{ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L,Y(v));ctx.lineTo(w-R,Y(v));ctx.stroke();ctx.textAlign='right';ctx.fillStyle='#52627d';ctx.fillText(fmt(v,1),L-6,Y(v));});
+ for(let i=0;i<=5;i++){const v=minR+(maxR-minR)*i/5;ctx.textAlign='center';ctx.fillStyle='#52627d';ctx.fillText(fmt(v,2),X(v),h-B+15)}
+ ctx.strokeStyle='#64748b';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(L,h-B);ctx.lineTo(w-R,h-B);ctx.stroke();
+ ctx.textAlign='left';ctx.fillStyle='#273b59';ctx.fillText('F (pN)',6,12);ctx.textAlign='right';ctx.fillText('r (nm)',w-4,h-8);
+ ctx.strokeStyle='#1b4cc2';ctx.lineWidth=2.5;ctx.beginPath();for(let i=0;i<=600;i++){const x=minR+(maxR-minR)*i/600;if(i===0)ctx.moveTo(X(x),Y(force(x)));else ctx.lineTo(X(x),Y(force(x)));}ctx.stroke();
+ ctx.setLineDash([5,4]);ctx.strokeStyle='#16866d';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(X(r0()),T);ctx.lineTo(X(r0()),h-B);ctx.stroke();
+ ctx.strokeStyle='#c47b14';ctx.beginPath();ctx.moveTo(X(r),T);ctx.lineTo(X(r),h-B);ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle='#dc3545';ctx.beginPath();ctx.arc(X(r),Y(force(r)),5,0,2*Math.PI);ctx.fill();
+}
+elInput.addEventListener('change',()=>{rInput.value=Math.round(1000*(r0()-limits()[0])/(limits()[1]-limits()[0]));update()});
+rInput.addEventListener('input',update);
+document.getElementById('equilibrium').addEventListener('click',()=>{const [lo,hi]=limits();rInput.value=Math.round(1000*(r0()-lo)/(hi-lo));update()});
+window.addEventListener('resize',update);
+{const [lo,hi]=limits();rInput.value=Math.round(1000*(r0()-lo)/(hi-lo));}update();
+
+const items=[
+['Co určuje, zda se částice přitahují, nebo odpuzují?',['Jejich vzájemná vzdálenost','Pouze jejich hmotnost','Pouze teplota tělesa'],0,'Rozhodující je vzájemná vzdálenost částic.'],
+['Co ukazuje malá stlačitelnost kapaliny?',['Přitažlivé síly','Odpudivé síly','Nepřítomnost částic'],1,'Při přiblížení částic prudce narůstá odpuzování.'],
+['Proč drží pevný předmět pohromadě?',['Díky přitažlivému působení částic','Díky nulové hmotnosti částic','Protože částice stojí'],0,'Přitažlivé síly drží částice látky pohromadě.'],
+['Co platí ve vzdálenosti r₀?',['Síla je největší','Výsledná síla je nulová','Částice se nutně rozpadnou'],1,'r₀ je rovnovážná vzdálenost.'],
+['Jaké znaménko má přitažlivá síla v grafu podle učebnice?',['Kladné','Záporné','Nemá znaménko'],1,'Používáme konvenci F < 0 pro přitažlivost.'],
+['Co se děje při velkém oddálení částic?',['Síla roste neomezeně','Síla slábne k nule','Síla je vždy odpudivá'],1,'Na velkých vzdálenostech přitažlivé působení prakticky zaniká.'],
+['Ve které vzdálenosti má potenciální energie minimum?',['V rovnovážné r₀','V nekonečné vzdálenosti','Při nulové vzdálenosti'],0,'Stabilní rovnováha odpovídá minimu potenciální energie.'],
+['Proč zahřátí může umožnit chemickou reakci?',['Více částic překoná aktivační bariéru','Přestanou působit síly','Částice se úplně zastaví'],0,'Vyšší teplota vede k vyšší průměrné kinetické energii.'],
+['Co se stane při natahování pevného tělesa?',['Vzniká síla působící proti natažení','Všechny částice se začnou odpuzovat','Zmizí vazby okamžitě'],0,'Při oddalování částic se projevuje přitažlivé působení.'],
+['Jakou energii musíme dodat při rozrušení vazby?',['Energii potřebnou k oddělení vázaných částic','Vždy nulovou','Pouze energii pohybu celého tělesa'],0,'K oddělení vázaných částic je potřeba vykonat práci.']];
+function render(){document.getElementById('questions').innerHTML=items.map((q,i)=>`<div class="q"><b>${i+1}. ${q[0]}</b>${q[1].map((v,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"> ${v}</label>`).join('')}<div id="f${i}" class="feedback"></div></div>`).join('')}
+function check(){let n=0;items.forEach((q,i)=>{const e=document.querySelector(`input[name=q${i}]:checked`),f=document.getElementById('f'+i);if(!e){f.textContent='Nezodpovězeno.';f.className='feedback wrong'}else if(+e.value===q[2]){n++;f.textContent='✓ Správně. '+q[3];f.className='feedback correct'}else{f.textContent='✗ Nesprávně. '+q[3];f.className='feedback wrong'}});document.getElementById('score').textContent='Správně: '+n+' z '+items.length+'.'}function resetQuiz(){render();document.getElementById('score').textContent=''}render();
+</script></body></html>
