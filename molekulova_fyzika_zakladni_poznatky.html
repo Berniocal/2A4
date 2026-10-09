@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Základní poznatky molekulové fyziky</title>
+<style>
+:root{
+  --bg:#f5f7fb; --card:#ffffff; --text:#172033; --muted:#64748b;
+  --accent:#2563eb; --accent2:#7c3aed; --ok:#15803d; --bad:#b91c1c;
+  --line:#dbe3ef; --soft:#eef4ff; --warn:#fff7ed;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+header{background:linear-gradient(135deg,#1d4ed8,#6d28d9);color:white;padding:42px 20px}
+header .wrap{max-width:1000px;margin:auto}
+h1{margin:0 0 8px;font-size:clamp(28px,5vw,46px)}
+.subtitle{opacity:.92;font-size:1.08rem}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 56px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 8px 24px rgba(30,41,59,.06)}
+h2{margin-top:0;font-size:1.45rem}
+h3{margin-bottom:8px}
+.key{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.key .item{padding:16px;border-radius:14px;background:var(--soft);border:1px solid #cfe0ff}
+.badge{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:4px 10px;font-weight:700;font-size:.84rem}
+.note{background:var(--warn);border-left:5px solid #f59e0b;padding:14px 16px;border-radius:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.example{border:1px solid var(--line);border-radius:14px;padding:16px}
+.example strong{color:#1d4ed8}
+.term{font-weight:800;color:#6d28d9}
+.quiz-top{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+button{border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer;background:#2563eb;color:white}
+button.secondary{background:#e2e8f0;color:#0f172a}
+button:hover{filter:brightness(.97)}
+.q{border-top:1px solid var(--line);padding:18px 0}
+.q:first-of-type{border-top:0}
+.answers{display:grid;gap:8px;margin-top:10px}
+.answer{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:#fff}
+.answer:hover{background:#f8fafc}
+.feedback{margin-top:8px;font-weight:700}
+.ok{color:var(--ok)} .bad{color:var(--bad)}
+.score{font-size:1.1rem;font-weight:800}
+.footer{color:var(--muted);text-align:center;margin-top:24px;font-size:.9rem}
+@media(max-width:760px){.key,.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="badge">Molekulová fyzika</span>
+    <h1>Základní poznatky molekulové fyziky</h1>
+    <div class="subtitle">Stručný zápis + interaktivní procvičování</div>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>1. Dva pohledy na látku</h2>
+    <div class="grid2">
+      <div class="example">
+        <h3>Makroskopický pohled</h3>
+        <p>Sledujeme veličiny, které můžeme měřit u celého tělesa nebo soustavy – například <b>teplotu, tlak a energii</b>. Neřešíme jednotlivé částice.</p>
+        <p><b>→ termodynamická metoda</b></p>
+      </div>
+      <div class="example">
+        <h3>Mikroskopický pohled</h3>
+        <p>Zajímá nás chování obrovského množství částic. Jednotlivé částice nesledujeme, používáme typické a statistické údaje.</p>
+        <p><b>→ statistická metoda</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. Tři základní poznatky</h2>
+    <div class="key">
+      <div class="item"><b>1.</b> Látky libovolného skupenství se skládají z <b>částic</b>.</div>
+      <div class="item"><b>2.</b> Částice se <b>neustále a neuspořádaně pohybují</b>. S rostoucí teplotou se tento pohyb zrychluje.</div>
+      <div class="item"><b>3.</b> Částice na sebe působí silami – při malých vzdálenostech <b>odpudivými</b>, při větších <b>přitažlivými</b>.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3. Jak se tyto poznatky projevují</h2>
+    <div class="grid2">
+      <div class="example">
+        <strong>Šíření vůně</strong>
+        <p>Částice vzduchu i voňavky se neustále neuspořádaně pohybují, proto se vůně postupně rozšíří po celé místnosti.</p>
+      </div>
+      <div class="example">
+        <strong>Louhování čaje</strong>
+        <p>Částice vody narážejí do částeček čaje a barvivo se šíří kapalinou. V horké vodě je pohyb částic rychlejší, proto se čaj louhuje rychleji.</p>
+      </div>
+      <div class="example">
+        <strong>Tlak plynu</strong>
+        <p>Částice plynu narážejí do stěn nádoby. Čím více částic, tím více srážek a tím větší výsledná síla na stěny.</p>
+      </div>
+      <div class="example">
+        <strong>Brownův pohyb</strong>
+        <p>Malé viditelné částice se chaoticky pohybují kvůli nerovnoměrným nárazům molekul kapaliny. Menší Brownovy částice se pohybují živěji.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>4. Difúze a osmóza</h2>
+    <p><span class="term">Difúze</span> = samovolné pronikání částic jedné látky mezi částice druhé látky.</p>
+    <p><span class="term">Osmóza</span> = difúze probíhající přes polopropustnou membránu.</p>
+    <div class="note"><b>Důsledek teploty:</b> v teple se částice pohybují rychleji, proto například cukr rozpouštíme rychleji v horkém čaji než ve studeném.</div>
+  </section>
+
+  <section class="card">
+    <h2>5. Shrnutí</h2>
+    <p><b>Látky se skládají z částic, které vykonávají neustálý neuspořádaný pohyb a při něm na sebe vzájemně působí silami.</b></p>
+  </section>
+
+  <section class="card">
+    <div class="quiz-top">
+      <h2 style="margin:0;flex:1">Procvičování</h2>
+      <button class="secondary" onclick="resetQuiz()">Nový pokus</button>
+      <button onclick="checkQuiz()">Vyhodnotit</button>
+    </div>
+    <p class="score" id="score">Vyber odpovědi a klikni na Vyhodnotit.</p>
+    <div id="quiz"></div>
+  </section>
+
+  <div class="footer">Základní poznatky molekulové fyziky • interaktivní procvičování</div>
+</main>
+
+<script>
+const questions = [
+ {q:"Z čeho se podle molekulové fyziky skládají látky?", a:["Z částic","Pouze z atomů","Z nepřetržité hmoty"], c:0, e:"Látky libovolného skupenství se skládají z částic."},
+ {q:"Jak se částice v látkách pohybují?", a:["Jen při zahřívání","Neustále a neuspořádaně","Pouze směrem dolů"], c:1, e:"Pohyb částic je neustálý a neuspořádaný."},
+ {q:"Co se děje s pohybem částic při růstu teploty?", a:["Zpomaluje se","Nemění se","Zrychluje se"], c:2, e:"S rostoucí teplotou se neuspořádaný pohyb částic zrychluje."},
+ {q:"Jak působí částice při velmi malých vzdálenostech?", a:["Odpudivě","Přitažlivě","Nepůsobí na sebe"], c:0, e:"Při malých vzdálenostech převládají odpudivé síly."},
+ {q:"Co je difúze?", a:["Kmitání částic kolem rovnovážné polohy","Samovolné pronikání částic jedné látky mezi částice druhé","Přeměna kapaliny na plyn"], c:1, e:"Takto je difúze v textu definována."},
+ {q:"Proč se čaj louhuje rychleji v horké vodě?", a:["Horká voda má menší hustotu","Částice se v ní pohybují rychleji","Horká voda obsahuje více částic"], c:1, e:"Vyšší teplota znamená rychlejší pohyb částic."},
+ {q:"Čím je způsoben tlak plynu na stěny nádoby?", a:["Nárazy částic plynu do stěn","Pouze přitažlivostí částic","Hmotností nádoby"], c:0, e:"Částice se pohybují a narážejí do stěn."},
+ {q:"Co způsobuje Brownův pohyb?", a:["Nerovnoměrné nárazy molekul kapaliny","Gravitační síla","Magnetické působení"], c:0, e:"Nárazy molekul z různých stran se dokonale nevyruší."},
+ {q:"Jak se pohybují menší Brownovy částice ve srovnání s většími?", a:["Pomaleji","Stejně","Živěji"], c:2, e:"U menších částic se nárazy méně zprůměrují."},
+ {q:"Co je osmóza?", a:["Difúze přes polopropustnou membránu","Pohyb plynu v uzavřené nádobě","Rozpouštění pevné látky"], c:0, e:"Osmóza je zvláštní případ difúze přes polopropustnou membránu."}
+];
+
+function renderQuiz(){
+  const qbox=document.getElementById("quiz");
+  qbox.innerHTML="";
+  questions.forEach((item,i)=>{
+    const div=document.createElement("div");
+    div.className="q";
+    div.innerHTML=`<b>${i+1}. ${item.q}</b>
+      <div class="answers">
+        ${item.a.map((x,j)=>`<label class="answer"><input type="radio" name="q${i}" value="${j}"> <span>${x}</span></label>`).join("")}
+      </div>
+      <div class="feedback" id="f${i}"></div>`;
+    qbox.appendChild(div);
+  });
+}
+function checkQuiz(){
+  let correct=0, answered=0;
+  questions.forEach((item,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const f=document.getElementById(`f${i}`);
+    if(!sel){f.textContent="Bez odpovědi.";f.className="feedback bad";return;}
+    answered++;
+    if(Number(sel.value)===item.c){
+      correct++; f.textContent="✓ Správně. "+item.e; f.className="feedback ok";
+    }else{
+      f.textContent="✗ Nesprávně. "+item.e; f.className="feedback bad";
+    }
+  });
+  document.getElementById("score").textContent=`Výsledek: ${correct} / ${questions.length} správně (${answered} zodpovězeno).`;
+  window.scrollTo({top:document.getElementById("score").getBoundingClientRect().top+window.scrollY-100,behavior:"smooth"});
+}
+function resetQuiz(){
+  renderQuiz();
+  document.getElementById("score").textContent="Vyber odpovědi a klikni na Vyhodnotit.";
+}
+renderQuiz();
+</script>
+</body>
+</html>
