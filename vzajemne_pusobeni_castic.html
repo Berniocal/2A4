@@ -19,7 +19,7 @@ const fmt=(n,d=3)=>n.toLocaleString('cs-CZ',{maximumFractionDigits:d,minimumFrac
 const getData=()=>values[elInput.value];
 const r0=()=>Math.pow(2,1/6)*getData().sigma*.1; // Å → nm
 const limits=()=>[.90*r0(),2.4*r0()];
-const rNow=()=>{const [lo,hi]=limits();return lo+(hi-lo)*(+rInput.value/1000)};
+const rNow=()=>{const [lo,hi]=limits();const eqTick=Math.round(1000*(r0()-lo)/(hi-lo));return +rInput.value===eqTick?r0():lo+(hi-lo)*(+rInput.value/1000)};
 function force(r){const v=getData(),s=v.sigma*.1,epsilon=v.eps*kB,x=s/r;return 24*epsilon/(r*1e-9)*(2*x**12-x**6)*1e12;} // pN
 function drawForceVectors(x1,x2,width,F){
  const svg=document.getElementById('forceArrows');
