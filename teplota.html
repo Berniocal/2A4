@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1d4ed8">
+<title>Teplota | Molekulová fyzika – 2A4</title>
+<style>
+:root{--bg:#f5f7fc;--fg:#172033;--card:#fff;--muted:#52627b;--line:#d9e3f1;--blue:#2563eb;--purple:#6d28d9;--soft:#eef4ff;--good:#15803d;--bad:#b91c1c;--warm:#ea580c;--cool:#0284c7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(125deg,#1d4ed8,#5b21b6);color:#fff;padding:35px 18px 42px}.wrap,main{max-width:1040px;margin:auto}header h1{font-size:clamp(2.25rem,6vw,3.6rem);line-height:1.15;margin:9px 0 8px}header p{opacity:.94;margin:0;max-width:750px}header a{color:#fff}
+main{padding:22px 16px 50px}nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 22px}nav a{padding:8px 12px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;color:#1d4ed8;text-decoration:none;font-weight:650;font-size:.91rem}
+section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:25px;margin:18px 0;box-shadow:0 7px 24px #20304a09}h2{margin:0 0 11px;font-size:1.52rem}h3{font-size:1.09rem;margin:10px 0}p{margin:9px 0 13px}.muted,small{color:var(--muted)}.eyebrow{text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;font-weight:850;opacity:.9}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.triple{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tile{background:var(--soft);border:1px solid #d3e2ff;padding:16px;border-radius:13px}.tile p:last-child{margin-bottom:0}.rule{background:#f0f4ff;border-left:4px solid #2563eb;border-radius:8px;padding:13px 16px;margin:13px 0}.rule strong{color:#1d4ed8}.warning{background:#fff7ed;border-left-color:#ea580c}.warning strong{color:#9a3412}
+.formula{font-weight:750;font-size:clamp(1.15rem,2.5vw,1.55rem);padding:15px;background:#eff6ff;text-align:center;border-radius:12px;margin:12px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.formula span{color:#1d4ed8}
+button{border:0;border-radius:11px;padding:10px 15px;font:inherit;font-weight:750;cursor:pointer;color:white;background:#2563eb}button.secondary{background:#e2e8f0;color:#0f172a}button:hover{filter:brightness(.96)}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+input[type=range]{width:100%;accent-color:#2563eb}input[type=number]{width:100%;padding:10px;border:1px solid #a8b8cf;border-radius:10px;font:inherit;background:var(--card);color:var(--fg)}label{font-weight:600;display:block}.value{font-size:1.45rem;font-weight:850;font-variant-numeric:tabular-nums}
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.scale{display:flex;justify-content:space-between;font-size:.79rem;color:var(--muted)}.thermo{height:17px;border-radius:999px;background:linear-gradient(90deg,#a9dafe,#ffe8b7,#ff9867);border:1px solid #b3c6dd;position:relative;margin:14px 0}.pin{position:absolute;top:-7px;transform:translateX(-50%);height:31px;width:6px;border-radius:4px;background:#182e5e;box-shadow:0 0 0 2px white}
+.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:400px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}th{background:#eef4ff}
+.canvas{display:block;width:100%;height:210px;background:#101f3a;border-radius:14px}fieldset{border:1px solid var(--line);border-radius:13px;padding:14px 15px;margin:13px 0}legend{font-weight:800}fieldset label{font-weight:450;padding:6px 0;cursor:pointer}fieldset input{accent-color:#2563eb;margin-right:8px}.feedback{font-weight:750;margin:5px 0}.good{color:var(--good)}.bad{color:var(--bad)}.tempbox{padding:18px;border-radius:14px;text-align:center;border:1px solid var(--line)}.hot{background:#fff0e7;border-color:#fed7aa}.cold{background:#e6f5ff;border-color:#bae6fd}.hot .value{color:#c2410c}.cold .value{color:#0369a1}
+.bar{height:18px;border-radius:999px;background:#e2e8f0;overflow:hidden}.bar div{height:100%;width:50%;background:linear-gradient(90deg,#93c5fd,#f97316);transition:width .1s}.details{border-top:1px solid var(--line);margin-top:18px;padding-top:10px}details summary{cursor:pointer;font-weight:800}footer{text-align:center;color:var(--muted);font-size:.86rem;padding:0 12px 32px}
+@media(max-width:730px){.grid2,.triple{grid-template-columns:1fr}section{padding:18px}header{padding:30px 16px}}
+@media(prefers-color-scheme:dark){:root{--bg:#101724;--fg:#edf3ff;--card:#192438;--muted:#b3c3df;--line:#354763;--soft:#1e3352}.tile,.rule,.formula{color:#f1f5f9}.rule,.formula{background:#243957}nav a{background:#1e3352;color:#c2d5ff;border-color:#425675}.tile{border-color:#425675}.hot{background:#4b281f;border-color:#8b4e35}.cold{background:#183c55;border-color:#266e96}.hot .value{color:#ffc08b}.cold .value{color:#9bd8ff}.warning{background:#483227}.warning strong{color:#ffca92}th{background:#243957}input[type=number]{border-color:#7484a0}.bar{background:#3c4a61}button.secondary{background:#34445e;color:white}}
+@media print{body{background:white;color:black}header{background:white;color:black;border-bottom:2px solid #000;padding:14px}nav,.interactive,#quizPanel{display:none}main{padding:0}section{break-inside:avoid;box-shadow:none;border:1px solid #aaa}.tile,.formula,.rule{background:white!important;color:black!important}footer{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="eyebrow">2A4 · Molekulová fyzika a termika · Základní poznatky</div><h1>Teplota</h1>
+<p>Co vlastně měří teploměr? Co znamená absolutní nula? Jak souvisejí stupně Celsia a kelviny?</p>
+<p style="margin-top:14px"><a href="./index.html">← Zpět na rozcestník</a></p></div></header>
+<main>
+<nav aria-label="Obsah"><a href="#teplota">Co je teplota</a><a href="#mereni">Měření</a><a href="#stupnice">Stupnice</a><a href="#prepocty">Převody</a><a href="#model">Modely</a><a href="#cviceni">Procvičování</a></nav>
+<section id="teplota">
+<h2>1. Co je teplota?</h2>
+<div class="rule"><strong>Teplota</strong> je fyzikální veličina charakterizující tepelný stav tělesa. Tělesa, která jsou ve vzájemné tepelné rovnováze, mají stejnou teplotu.</div>
+<p>Teplota souvisí s <b>neuspořádaným pohybem částic</b>. Například u ideálního plynu znamená vyšší termodynamická teplota větší střední kinetickou energii molekul.</p>
+<div class="triple"><div class="tile"><h3>Teplé a studené těleso</h3><p>Při tepelném kontaktu se energie samovolně přenáší <b>z teplejšího na chladnější</b>.</p></div>
+<div class="tile"><h3>Tepelná rovnováha</h3><p>Po dostatečně dlouhé době mohou obě tělesa dosáhnout <b>stejné teploty</b> a čistý tok energie mezi nimi ustane.</p></div>
+<div class="tile"><h3>Teplota ≠ teplo</h3><p>Teplota popisuje stav. <b>Teplo</b> označuje energii předanou mezi soustavami kvůli rozdílu teplot.</p></div></div>
+<div class="rule warning"><strong>Zamysli se:</strong> Kovová klika a dřevěné dveře mohou mít stejnou teplotu, ale klika působí chladněji. Kov totiž odvádí energii z ruky rychleji. Pocit chladu není přesný teploměr.</div>
+</section>
+<section id="mereni"><h2>2. Měření teploty</h2>
+<p>Teploměr využívá vlastnost, která se s teplotou předvídatelně mění. Při kontaktním měření obvykle čekáme, než se <b>teploměr a těleso dostanou do tepelné rovnováhy</b>.</p>
+<div class="grid2"><div class="tile"><h3>Kapalinový teploměr</h3><p>Se změnou teploty se mění objem kapaliny; sloupec v trubičce stoupá nebo klesá.</p></div>
+<div class="tile"><h3>Elektronický teploměr</h3><p>Může vyhodnocovat například změnu elektrického odporu čidla.</p></div></div>
+<p class="muted">Bezdotykové infračervené teploměry vyhodnocují tepelné záření a nemusejí dosáhnout tepelné rovnováhy s měřeným tělesem.</p>
+</section>
+<section id="stupnice"><h2>3. Teplotní stupnice</h2>
+<div class="grid2"><div class="tile"><h3>Celsiova teplota</h3><p><b>Značka:</b> <i>t</i> &nbsp; <b>Jednotka:</b> stupeň Celsia (°C)</p><p>Historicky byly důležité dva body při normálním atmosférickém tlaku: <b>0 °C</b> (tání ledu) a <b>100 °C</b> (var vody).</p></div>
+<div class="tile"><h3>Termodynamická teplota</h3><p><b>Značka:</b> <i>T</i> &nbsp; <b>Jednotka:</b> kelvin (K)</p><p>Stupnice začíná na <b>0 K</b> – absolutní nule. Velikost změny o 1 K je stejná jako změna o 1 °C.</p></div></div>
+<div class="formula">0 K = −273,15 °C</div>
+<p>Absolutní nula je dolní mez termodynamické teploty. <b>Neznamená</b> však nutně úplné zastavení veškerého pohybu částic; mohou přetrvávat kvantové pohyby.</p>
+<div class="tablewrap"><table><thead><tr><th>Příklad</th><th>Celsiova teplota</th><th>Termodynamická teplota</th></tr></thead><tbody><tr><td>Absolutní nula</td><td>−273,15 °C</td><td>0 K</td></tr><tr><td>Tání ledu</td><td>0 °C</td><td>273,15 K</td></tr><tr><td>Pokojová teplota</td><td>20 °C</td><td>293,15 K</td></tr><tr><td>Var vody (normální tlak)</td><td>100 °C</td><td>373,15 K</td></tr></tbody></table></div>
+</section>
+<section id="prepocty"><h2>4. Převody mezi °C a K</h2><div class="grid2">
+<div><h3>Z °C na K</h3><div class="formula"><span>T</span> = (<span>t</span> / °C + 273,15) K</div><p>Například: 25 °C = <b>298,15 K</b>.</p></div>
+<div><h3>Z K na °C</h3><div class="formula"><span>t</span> = (<span>T</span> / K − 273,15) °C</div><p>Například: 300 K = <b>26,85 °C</b>.</p></div></div>
+<div class="rule"><strong>Rozdíl teplot:</strong> Zvýšení o 10 °C odpovídá zvýšení o 10 K. Číselná hodnota změny teploty je na obou stupnicích stejná: Δ<i>T</i> [K] = Δ<i>t</i> [°C].</div>
+<div class="interactive tile">
+<h3>Interaktivní převodník</h3><div class="grid2"><div><label for="cels">Celsiova teplota (°C)</label><input id="cels" type="number" step="any" min="-273.15" max="1000000" value="20"></div><div><label for="kelv">Termodynamická teplota (K)</label><input id="kelv" type="number" step="any" min="0" value="293.15"></div></div>
+<div class="thermo" aria-hidden="true"><span class="pin" id="needle" style="left:36%"></span></div><div class="scale"><span>−273,15 °C</span><span>0 °C</span><span>100 °C</span><span>200 °C</span></div><p id="convFb" role="status" class="muted">Změň jednu hodnotu a sleduj druhou.</p>
+</div>
+<div class="details"><details><summary>Proč při výpočtech v plynech používáme kelviny?</summary><p>Stavové rovnice a vztahy pro střední kinetickou energii používají <b>absolutní termodynamickou teplotu</b>. Například zdvojnásobení teploty ze 300 K na 600 K má fyzikální význam, zatímco zdvojnásobení číselné hodnoty z 20 °C na 40 °C neznamená zdvojnásobení termodynamické teploty.</p></details></div>
+</section>
+<section id="model"><h2>5. Interaktivní modely</h2>
+<h3>A. Jak vzniká tepelná rovnováha?</h3><p>Dvě izolovaná tělesa se stejnou tepelnou kapacitou přivedeme do kontaktu. Sleduj, jak se jejich teploty vyrovnávají. Model je zjednodušený; nepočítá s tepelnými ztrátami ani změnou skupenství.</p>
+<div class="interactive tile"><div class="grid2">
+<div><label for="hot0">Počáteční teplota A: <output id="hot0Val">80 °C</output></label><input id="hot0" type="range" min="-30" max="100" value="80"></div>
+<div><label for="cold0">Počáteční teplota B: <output id="cold0Val">20 °C</output></label><input id="cold0" type="range" min="-30" max="100" value="20"></div></div>
+<div class="grid2" style="margin:14px 0"><div class="tempbox hot"><div>Těleso A</div><div class="value" id="ta">80,0 °C</div></div><div class="tempbox cold"><div>Těleso B</div><div class="value" id="tb">20,0 °C</div></div></div>
+<div class="bar"><div id="progress" style="width:0%"></div></div><p id="heatDesc" role="status">Energie se přenáší z A do B.</p>
+<div class="controls"><button id="startEq">Spojit tělesa</button><button class="secondary" id="resetEq">Vrátit na začátek</button></div>
+<p class="muted">Při stejných tepelných kapacitách je konečná teplota aritmetickým průměrem obou počátečních teplot. Výpočet množství předané energie bude tématem kalorimetrie.</p></div>
+<h3>B. Jak souvisí teplota a pohyb částic plynu?</h3><p>Posouváním měň teplotu. Částice se pohybují rychleji při vyšší termodynamické teplotě. Animace je názorné schéma bez skutečného měřítka a neznázorňuje skupenskou změnu.</p>
+<div class="interactive tile"><label for="gasTemp">Teplota plynu: <output id="gasTempOut">20 °C (293,15 K)</output></label><input id="gasTemp" type="range" min="-100" max="150" value="20"><canvas id="gas" class="canvas" width="860" height="270" role="img" aria-label="Schematický model náhodně se pohybujících částic plynu"></canvas><div class="controls" style="margin-top:12px"><button id="pauseGas" class="secondary">Pozastavit částice</button><button id="restartGas" class="secondary">Nové rozmístění</button></div></div>
+</section>
+<section id="cviceni"><h2>6. Otázky a procvičování</h2>
+<div class="tile"><h3>Krátká diskuze ve třídě</h3><ol><li>Proč může mít kovová lžíce a dřevěný stůl stejnou teplotu, ale jiný pocit při dotyku?</li><li>Je rozdíl mezi „má vyšší teplotu“ a „obsahuje více energie“?</li><li>Co se stane s kontaktním teploměrem, který vložíme do teplejší vody?</li><li>Kolik kelvinů je změna teploty z 5 °C na 35 °C?</li></ol></div>
+<div class="interactive" id="quizPanel"><h3>Samostatné ověření znalostí</h3><div id="quiz"></div><div class="controls"><button id="checkQuiz">Vyhodnotit</button><button class="secondary" id="resetQuiz">Nový pokus</button></div><p id="score" aria-live="polite"></p></div>
+<div class="details"><details><summary>Řešení otázek k diskuzi</summary><ol><li>Kov vede teplo lépe a odvádí energii z ruky rychleji.</li><li>Ano. Teplota není totéž co celková vnitřní energie; záleží i na množství a druhu látky.</li><li>Teploměr přijímá energii a jeho údaj roste, až se jeho teplota přiblíží teplotě vody.</li><li>O 30 K.</li></ol></details></div>
+</section>
+<section><h2>7. Co si zapamatovat</h2><div class="triple"><div class="tile"><b>Teplota a rovnováha</b><p>Ve vzájemné tepelné rovnováze mají tělesa stejnou teplotu.</p></div><div class="tile"><b>Kelvinova stupnice</b><p>0 K je absolutní nula, odpovídá −273,15 °C.</p></div><div class="tile"><b>Převod</b><p>Číselně: K = °C + 273,15; změna o 1 °C = změna o 1 K.</p></div></div><p class="muted">Další téma: relativní atomová a molekulová hmotnost.</p>
+<p><a href="https://www.realisticky.cz/dil.php?id=7" target="_blank" rel="noopener noreferrer">Další příklady a výklad: Realisticky.cz – Molekulová fyzika a termika</a></p>
+</section>
+</main><footer>2A4 · Fyzika · Teplota · Výukový materiál; modely jsou názorné, nikoli věrné simulace mikroskopické reality.</footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id),dec=(n,d=2)=>new Intl.NumberFormat("cs-CZ",{maximumFractionDigits:d}).format(n);
+const cels=$("cels"),kelv=$("kelv");
+function sync(source){let n=Number(source.value);if(!Number.isFinite(n)||source.value===""){$("convFb").textContent="Zadej platné číslo.";return;}let c=source===cels?n:n-273.15,k=c+273.15;if(k<-1e-8){$("convFb").textContent="Teplota nemůže být nižší než 0 K.";return;}if(source===cels)kelv.value=String(Number(k.toFixed(8)));else cels.value=String(Number(c.toFixed(8)));$("convFb").textContent=dec(c)+" °C odpovídá "+dec(k)+" K.";const pct=Math.max(0,Math.min(100,100*(c+273.15)/(200+273.15)));$("needle").style.left=pct+"%";}
+cels.addEventListener("input",()=>sync(cels));kelv.addEventListener("input",()=>sync(kelv));sync(cels);
+let tA=80,tB=20,contact=false;
+function eqText(){let diff=tA-tB,mean=(tA+tB)/2;$("ta").textContent=dec(tA,1)+" °C";$("tb").textContent=dec(tB,1)+" °C";const d0=Math.abs(+$("hot0").value-(+$("cold0").value));$("progress").style.width=(d0?100*(1-Math.abs(diff)/d0):100)+"%";$("heatDesc").textContent=Math.abs(diff)<.08?"Obě tělesa dosáhla přibližně stejné teploty.":diff>0?"Energie se přenáší z A do B. Rovnovážná teplota bude "+dec((+$("hot0").value+(+$("cold0").value))/2,1)+" °C.":"Energie se přenáší z B do A. Rovnovážná teplota bude "+dec((+$("hot0").value+(+$("cold0").value))/2,1)+" °C.";if(contact&&Math.abs(diff)<.08){contact=false;$("startEq").textContent="Spojit tělesa";}}
+function resetEq(){contact=false;tA=+$("hot0").value;tB=+$("cold0").value;$("hot0Val").textContent=tA+" °C";$("cold0Val").textContent=tB+" °C";$("startEq").textContent="Spojit tělesa";eqText();}
+$("hot0").addEventListener("input",resetEq);$("cold0").addEventListener("input",resetEq);$("resetEq").addEventListener("click",resetEq);$("startEq").addEventListener("click",()=>{contact=!contact;$("startEq").textContent=contact?"Pozastavit přenos":"Spojit tělesa";});resetEq();
+let gasRun=true,last=0;const canvas=$("gas"),ctx=canvas.getContext("2d");let particles=[];
+function restartGas(){particles=[];for(let i=0;i<34;i++){let a=Math.random()*Math.PI*2;particles.push({x:12+Math.random()*(canvas.width-24),y:12+Math.random()*(canvas.height-24),vx:Math.cos(a),vy:Math.sin(a)})}}
+function drawGas(ts){if(last===0)last=ts;let dt=Math.min(42,ts-last);last=ts;let t=+$("gasTemp").value,k=t+273.15,spd=1.75*Math.sqrt(k/293.15);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#101f3a";ctx.fillRect(0,0,canvas.width,canvas.height);for(const p of particles){if(gasRun){p.x+=p.vx*spd*dt*.1;p.y+=p.vy*spd*dt*.1;if(p.x<9||p.x>canvas.width-9){p.vx*=-1;p.x=Math.max(9,Math.min(canvas.width-9,p.x))}if(p.y<9||p.y>canvas.height-9){p.vy*=-1;p.y=Math.max(9,Math.min(canvas.height-9,p.y))}}ctx.beginPath();ctx.arc(p.x,p.y,6,0,Math.PI*2);ctx.fillStyle="#93c5fd";ctx.fill()}requestAnimationFrame(drawGas);}
+$("gasTemp").addEventListener("input",()=>{$("gasTempOut").textContent=$("gasTemp").value+" °C ("+dec(+$("gasTemp").value+273.15)+" K)";});$("pauseGas").addEventListener("click",()=>{gasRun=!gasRun;$("pauseGas").textContent=gasRun?"Pozastavit částice":"Spustit částice";});$("restartGas").addEventListener("click",restartGas);restartGas();requestAnimationFrame(drawGas);
+let eqLast=0;function advanceEq(ts){let dt=Math.min(100,ts-(eqLast||ts));eqLast=ts;if(contact){let mean=(tA+tB)/2,fac=1-Math.exp(-dt*.0014);tA+=(mean-tA)*fac;tB+=(mean-tB)*fac;eqText()}requestAnimationFrame(advanceEq)}requestAnimationFrame(advanceEq);
+const qs=[
+["Co charakterizuje teplota?",["Tepelný stav tělesa","Celkový počet částic","Hmotnost tělesa"],0],
+["Kdy mají dvě tělesa stejnou teplotu?",["Vždy, když mají stejnou hmotnost","Jsou-li ve vzájemné tepelné rovnováze","Jen když jsou z téže látky"],1],
+["Jakým směrem se samovolně přenáší energie tepelným kontaktem?",["Z chladnějšího na teplejší","Z teplejšího na chladnější","Vždy z těžšího na lehčí"],1],
+["Co odpovídá 0 K?",["0 °C","−100 °C","−273,15 °C"],2],
+["Kolik kelvinů přibližně odpovídá 27 °C?",["300 K","27 K","246 K"],0],
+["Co znamená zahřátí o 15 °C?",["Zvýšení o 288,15 K","Zvýšení o 15 K","Zvýšení o 15krát"],1],
+["Jaký údaj musí používat běžné termodynamické vztahy pro ideální plyn?",["Celsiovu teplotu","Termodynamickou teplotu v kelvinech","Libovolně °C nebo K bez převodu"],1],
+["Proč kov často působí na dotyk chladněji než dřevo stejné teploty?",["Má vždy nižší teplotu","Lépe odvádí energii z ruky","Nemá částice"],1]
+];
+function renderQuiz(){$("quiz").innerHTML=qs.map((q,i)=>'<fieldset><legend>'+(i+1)+'. '+q[0]+'</legend>'+q[1].map((x,j)=>'<label><input type="radio" name="q'+i+'" value="'+j+'"> '+x+'</label>').join('')+'<p id="qfb'+i+'" class="feedback" aria-live="polite"></p></fieldset>').join('');$("score").textContent="Vyber odpovědi a klikni na Vyhodnotit."}
+$("checkQuiz").addEventListener("click",()=>{let n=0;qs.forEach((q,i)=>{let selected=document.querySelector('input[name="q'+i+'"]:checked'),f=$("qfb"+i);if(!selected){f.className="feedback bad";f.textContent="Nezodpovězeno."}else if(Number(selected.value)===q[2]){n++;f.className="feedback good";f.textContent="✓ Správně."}else{f.className="feedback bad";f.textContent="✗ Správně: "+q[1][q[2]]}});$("score").textContent="Správně "+n+" z "+qs.length+"."});$("resetQuiz").addEventListener("click",renderQuiz);renderQuiz();
+</script>
+</body></html>
