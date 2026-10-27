@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1d4ed8">
+<title>Relativní hmotnosti a molární veličiny | 2A4 – Fyzika</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7fc;--fg:#172033;--card:#fff;--muted:#52627b;--line:#d9e3f1;--blue:#2563eb;--purple:#6d28d9;--soft:#eef4ff;--ok:#15803d;--bad:#b91c1c;--warn:#fff7ed;--formula:#eff6ff;--field:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(125deg,#1d4ed8,#5b21b6);color:#fff;padding:38px 18px 43px}.wrap,main{max-width:1060px;margin:auto}
+header h1{font-size:clamp(2.1rem,5.5vw,3.5rem);line-height:1.12;margin:10px 0}header p{max-width:820px;margin:0;opacity:.94}header a{color:white}
+main{padding:20px 16px 55px}nav{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 23px}nav a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 12px;text-decoration:none;color:var(--blue);font-size:.92rem;font-weight:700}
+section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 7px 24px #20304a09}
+h2{font-size:1.53rem;margin:0 0 12px;line-height:1.32}h3{font-size:1.1rem;margin:10px 0}p{margin:10px 0 13px}.eyebrow{font-size:.82rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.tile{border:1px solid #d3e2ff;border-radius:14px;padding:17px;background:var(--soft)}.tile>*:last-child{margin-bottom:0}
+.rule{border-left:4px solid var(--blue);padding:13px 16px;border-radius:8px;background:var(--soft);margin:14px 0}
+.warn{background:var(--warn);border-left-color:#ea580c}
+.formula{background:var(--formula);border-radius:12px;padding:14px;text-align:center;font-size:clamp(1.08rem,3vw,1.5rem);font-weight:800;margin:12px 0;overflow-wrap:anywhere}
+.formula small{display:block;font-size:.8rem;font-weight:500;color:var(--muted)}
+table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}th{background:var(--soft)}.scroll{overflow:auto}small,.muted{color:var(--muted)}
+button{font:inherit;background:var(--blue);color:#fff;border:0;border-radius:11px;padding:11px 15px;font-weight:760;cursor:pointer}button.secondary{color:var(--fg);background:var(--soft);border:1px solid var(--line)}button:hover{filter:brightness(.95)}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+input[type=number],input[type=text],select{font:inherit;background:var(--field);color:var(--fg);border:1px solid #94a3b8;border-radius:10px;padding:10px 11px;width:100%;min-width:0}
+input[type=range]{width:100%;accent-color:var(--blue)}label{font-weight:700;display:block;margin-bottom:5px}fieldset{border:1px solid var(--line);border-radius:13px;padding:15px 17px;margin:12px 0}legend{font-weight:800;padding:0 5px}.choice{display:block;font-weight:450;cursor:pointer;padding:5px 0}.choice input{accent-color:var(--blue);margin-right:9px}
+.output{font-size:1.32rem;font-weight:850;color:var(--blue);overflow-wrap:anywhere}.pair{display:flex;gap:7px;flex-wrap:wrap;align-items:center;justify-content:space-between}.resultgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.result{border:1px solid var(--line);border-radius:13px;padding:15px;background:var(--soft);min-width:0}.result small{display:block}
+.value{font-size:1.3rem;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.calc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:end}
+.steps{border-top:1px solid var(--line);margin-top:15px;padding-top:14px;overflow-wrap:anywhere}
+button:disabled,select:disabled{opacity:.5;cursor:not-allowed}
+.molecules{min-height:120px;border-radius:14px;background:var(--soft);padding:14px;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}
+.atom{display:inline-flex;justify-content:center;align-items:center;width:48px;height:48px;border-radius:50%;color:#fff;font-weight:850;box-shadow:inset -8px -9px 9px #0002,0 2px 6px #0002}.atom.h{background:#94a3b8}.atom.o{background:#ef4444}.atom.c{background:#374151}.atom.n{background:#2563eb}.atom.he{background:#eab308;color:#27272a}
+.bubble{border:1px solid var(--line);padding:10px 14px;border-radius:13px;background:var(--soft);font-weight:700}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:10px 0;background:var(--card)}summary{cursor:pointer;font-weight:800}.question-result{margin:8px 0 0;font-weight:700}.good{color:var(--ok)}.bad{color:var(--bad)}
+.actionrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}#quizScore{font-weight:800}
+footer{color:var(--muted);text-align:center;padding:4px 15px 30px;font-size:.85rem}
+@media(max-width:750px){.grid2,.grid3,.calc,.resultgrid{grid-template-columns:1fr}header{padding:30px 16px}section{padding:18px}.atom{height:42px;width:42px}}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#101724;--fg:#edf3ff;--card:#192438;--muted:#b3c3df;--line:#354763;--soft:#203651;--warn:#473023;--formula:#243957;--field:#152235;--blue:#93b4ff}.tile{border-color:#405879}.atom.c{background:#475569}.output,.value{color:#acc6ff}}
+@media print{body{background:#fff;color:#111}header{background:#fff;color:#111;padding:15px;border-bottom:2px solid #111}header a,nav,.interactive,footer{display:none!important}section{box-shadow:none;border:1px solid #aaa;break-inside:avoid}.tile,.rule,.formula,.result{background:#fff!important;color:#111!important}details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">2A4 · Molekulová fyzika a termika</div>
+<h1>Relativní hmotnosti a molární veličiny</h1>
+<p>Jak spočítat atomy, když je nemůžeme jeden po druhém zvážit? Propojíme relativní hmotnost, jeden mol, počet částic, hmotnost a objem.</p>
+<p style="margin-top:12px"><a href="./index.html">← Zpět na rozcestník</a></p>
+</div></header>
+<main>
+<nav aria-label="Obsah">
+<a href="#hmotnosti">Relativní hmotnosti</a><a href="#mol">Mol a Avogadrova konstanta</a><a href="#veliciny">Molární veličiny</a><a href="#laborator">Kalkulačka</a><a href="#priklady">Příklady</a><a href="#kviz">Procvičování</a>
+</nav>
+
+<section id="hmotnosti">
+<h2>1. Relativní atomová a molekulová hmotnost</h2>
+<p>Atom uhlíku <sup>12</sup>C má hmotnost jen přibližně 1,99 · 10<sup>−26</sup> kg. Pracovat s takovými čísly je nepohodlné, proto hmotnosti atomů porovnáváme s jednou společnou jednotkou.</p>
+<div class="rule"><strong>Atomová hmotnostní konstanta</strong> je jedna dvanáctina hmotnosti atomu uhlíku <sup>12</sup>C.</div>
+<div class="formula">m<sub>u</sub> ≈ 1,66 · 10<sup>−27</sup> kg</div>
+<div class="grid2">
+<div class="tile"><h3>Relativní atomová hmotnost A<sub>r</sub></h3><p>Říká, kolikrát je hmotnost atomu větší než atomová hmotnostní konstanta.</p><div class="formula">A<sub>r</sub> = m<sub>a</sub> / m<sub>u</sub></div><p>Nemá jednotku. Např. A<sub>r</sub>(C) ≈ 12,01; A<sub>r</sub>(O) ≈ 16.</p></div>
+<div class="tile"><h3>Relativní molekulová hmotnost M<sub>r</sub></h3><p>Získáme ji součtem relativních atomových hmotností všech atomů v molekule.</p><div class="formula">M<sub>r</sub>(H<sub>2</sub>O) = 2 · 1 + 16 = 18</div><p>Stejně jako A<sub>r</sub> nemá jednotku.</p></div>
+</div>
+<div class="rule warn"><strong>Proč má přírodní uhlík A<sub>r</sub> ≈ 12,01, a ne přesně 12?</strong> Přírodní uhlík obsahuje různé izotopy. Hodnota v tabulkách zohledňuje jejich zastoupení.</div>
+<div class="interactive tile">
+<h3>Vyzkoušej složení molekuly</h3>
+<div class="grid2"><div><label for="molSelect">Molekula</label><select id="molSelect"><option value="h2o">Voda H₂O</option><option value="co2">Oxid uhličitý CO₂</option><option value="o2">Kyslík O₂</option><option value="n2">Dusík N₂</option></select></div><div><label>Výpočet M<sub>r</sub></label><div class="bubble" id="mrText">2 · 1 + 16 = 18</div></div></div>
+<div id="molDrawing" class="molecules" aria-label="Schematické složení molekuly"></div>
+<p class="muted">Kuličky znázorňují počet a druh atomů, nikoli skutečnou velikost, prostorové uspořádání nebo chemickou vazbu.</p>
+</div>
+</section>
+
+<section id="mol">
+<h2>2. Avogadrova konstanta a látkové množství</h2>
+<p>V běžných tělesech je nepředstavitelně mnoho atomů a molekul. Místo vypisování obrovských počtů zavádíme <strong>látkové množství</strong> se jednotkou <strong>mol</strong>.</p>
+<div class="grid3">
+<div class="tile"><h3>Jeden mol</h3><p>Obsahuje přibližně <strong>602 triliard částic</strong> daného druhu.</p></div>
+<div class="tile"><h3>Avogadrova konstanta</h3><p>Přesná definovaná hodnota:</p><p><strong>N<sub>A</sub> = 6,022 140 76 · 10<sup>23</sup> mol<sup>−1</sup></strong></p></div>
+<div class="tile"><h3>Látkové množství</h3><p>Značka: <strong>n</strong></p><p>Jednotka: <strong>mol</strong></p><p>Stejný počet částic znamená stejné látkové množství.</p></div>
+</div>
+<div class="formula">n = N / N<sub>A</sub> &emsp; ⇔ &emsp; N = n · N<sub>A</sub></div>
+<p><strong>N</strong> označuje počet částic (čisté číslo), <strong>N<sub>A</sub></strong> počet částic v jednom molu.</p>
+<div class="interactive tile">
+<h3>Kolik částic představuje zvolené látkové množství?</h3>
+<label for="molRange">Látkové množství: <output id="molRangeValue">1 mol</output></label>
+<input type="range" id="molRange" min="0.25" max="5" step="0.25" value="1">
+<div class="grid2" style="margin-top:12px">
+<div class="result"><small>Počet částic</small><div class="value" id="molParticleValue">6,022 · 10²³</div></div>
+<div class="result"><small>Hmotnost vody (H₂O)</small><div class="value" id="molWaterValue">18 g</div></div>
+</div>
+<p class="muted">Pozor: jeden mol různých látek obsahuje stejný počet částic, ale nemá stejnou hmotnost.</p>
+</div>
+</section>
+
+<section id="veliciny">
+<h2>3. Molární hmotnost a molární objem</h2>
+<div class="grid2">
+<div class="tile"><h3>Molární hmotnost M<sub>m</sub></h3><p>Hmotnost jednoho molu látky.</p><div class="formula">M<sub>m</sub> = m / n</div><p>Jednotka: kg/mol (často g/mol).</p><p><strong>Číselně</strong> se M<sub>m</sub> v g/mol rovná A<sub>r</sub> nebo M<sub>r</sub>. Např. voda má M<sub>r</sub> = 18 a M<sub>m</sub> = 18 g/mol.</p></div>
+<div class="tile"><h3>Molární objem V<sub>m</sub></h3><p>Objem jednoho molu látky za daných podmínek.</p><div class="formula">V<sub>m</sub> = V / n</div><p>Jednotka: m³/mol (často dm³/mol).</p><p>U plynů závisí na teplotě a tlaku.</p></div>
+</div>
+<div class="rule"><strong>Normální fyzikální podmínky:</strong> teplota 0 °C (273,15 K) a tlak 101 325 Pa. Za těchto podmínek má jeden mol <strong>ideálního plynu</strong> objem přibližně <strong>22,4 dm³</strong> (22,4 litru).</div>
+<div class="formula">V<sub>m</sub> ≈ 22,4 dm³/mol <small>Pro ideální plyn za normálních fyzikálních podmínek.</small></div>
+<p>Molární objem lze také určit z hustoty: <strong>V<sub>m</sub> = M<sub>m</sub> / ρ</strong>. Pro dusík a helium vychází za normálních podmínek v dobrém přiblížení stejná hodnota.</p>
+<h3>Nejdůležitější společný vztah</h3>
+<div class="formula">n = N / N<sub>A</sub> = m / M<sub>m</sub> = V / V<sub>m</sub></div>
+<div class="scroll"><table><thead><tr><th>Veličina</th><th>Značka</th><th>Co označuje</th><th>Jednotka</th></tr></thead><tbody>
+<tr><td>Počet částic</td><td>N</td><td>Počet atomů či molekul</td><td>1</td></tr>
+<tr><td>Látkové množství</td><td>n</td><td>Počet molů</td><td>mol</td></tr>
+<tr><td>Molární hmotnost</td><td>M<sub>m</sub></td><td>Hmotnost 1 molu</td><td>kg/mol; g/mol</td></tr>
+<tr><td>Molární objem</td><td>V<sub>m</sub></td><td>Objem 1 molu</td><td>m³/mol; dm³/mol</td></tr>
+<tr><td>Avogadrova konstanta</td><td>N<sub>A</sub></td><td>Částice na 1 mol</td><td>mol<sup>−1</sup></td></tr></tbody></table></div>
+<div class="rule warn"><strong>Nezaměňuj!</strong> A<sub>r</sub> a M<sub>r</sub> jsou bez jednotky, zatímco M<sub>m</sub> je hmotnost na jeden mol. Hodnota 22,4 l/mol neplatí obecně pro kapaliny a pevné látky.</div>
+</section>
+
+<section id="laborator">
+<h2>4. Výpočtová laboratoř</h2>
+<p>Zvol látku a veličinu, kterou znáš. Aplikace dopočítá látkové množství, hmotnost a počet částic. Pro plyny také přibližný objem za normálních podmínek.</p>
+<div class="interactive tile">
+<div class="calc">
+<div><label for="substance">Látka</label><select id="substance">
+<option value="H2O">Voda H₂O (molekuly)</option><option value="Cu">Měď Cu (atomy)</option><option value="Hg">Rtuť Hg (atomy)</option><option value="He">Helium He (atomy)</option><option value="N2">Dusík N₂ (molekuly)</option><option value="O2">Kyslík O₂ (molekuly)</option><option value="CO2">Oxid uhličitý CO₂ (molekuly)</option>
+</select></div>
+<div><label for="given">Zadaná veličina</label><select id="given"><option value="m">Hmotnost m (g)</option><option value="N">Počet částic N</option><option value="n">Látkové množství n (mol)</option><option value="V">Objem plynu V (l)</option></select></div>
+<div><label for="givenValue">Hodnota</label><input id="givenValue" type="text" inputmode="decimal" value="18" placeholder="Např. 18 nebo 1e9" autocomplete="off"></div>
+</div>
+<div id="calcInfo" class="muted" style="margin-top:9px">Zápis 1e9 znamená 1 · 10⁹.</div>
+<div class="resultgrid">
+<div class="result"><small>Látkové množství n</small><div class="value" id="outNmol">1 mol</div></div>
+<div class="result"><small>Hmotnost m</small><div class="value" id="outMass">18 g</div></div>
+<div class="result"><small>Počet částic N</small><div class="value" id="outParticles">6,022 · 10²³</div></div>
+</div>
+<div class="result" style="margin-top:12px"><small id="volumeLabel">Objem za normálních podmínek</small><div class="value" id="outVolume">—</div></div>
+<div class="steps" id="calcSteps" aria-live="polite"></div>
+</div>
+</section>
+
+<section id="priklady">
+<h2>5. Řešené příklady</h2>
+<p>Nejdřív se pokus určit, který vztah použít. Výsledek a postup zobrazíš kliknutím na příklad.</p>
+<details><summary>A. Kolik atomů obsahují 2 g mědi? (M<sub>m</sub> = 63,55 g/mol)</summary>
+<p>Nejprve n = m / M<sub>m</sub> = 2 / 63,55 ≈ 0,0315 mol.</p>
+<p>N = n · N<sub>A</sub> ≈ <strong>1,90 · 10<sup>22</sup> atomů</strong>.</p></details>
+<details><summary>B. Jakou hmotnost má miliarda atomů rtuti? (M<sub>m</sub> = 200,59 g/mol)</summary>
+<p>n = N / N<sub>A</sub> = 10<sup>9</sup> / (6,022 · 10<sup>23</sup>) ≈ 1,66 · 10<sup>−15</sup> mol.</p>
+<p>m = n · M<sub>m</sub> ≈ <strong>3,33 · 10<sup>−13</sup> g</strong> (3,33 · 10<sup>−16</sup> kg).</p></details>
+<details><summary>C. Jaký objem zaujímá miliarda atomů helia? (normální podmínky)</summary>
+<p>n = N / N<sub>A</sub> ≈ 1,66 · 10<sup>−15</sup> mol.</p>
+<p>V = n · V<sub>m</sub> ≈ <strong>3,72 · 10<sup>−14</sup> l</strong> (3,72 · 10<sup>−17</sup> m³). Uvažujeme přibližně ideální plyn.</p></details>
+<details><summary>D. Kolik molekul obsahuje 1,5 kg vody? (M<sub>m</sub> = 18 g/mol)</summary>
+<p>m = 1,5 kg = 1500 g; n = 1500 / 18 ≈ 83,33 mol.</p>
+<p>N = n · N<sub>A</sub> ≈ <strong>5,02 · 10<sup>25</sup> molekul</strong>.</p></details>
+</section>
+
+<section id="kviz">
+<h2>6. Procvičování – zkus to sám</h2>
+<div class="interactive">
+<p>U prvních otázek vybírej odpověď. U početních úloh napiš jedno číslo; můžeš použít desetinnou čárku i zápis <code>1.2e23</code>.</p>
+<div id="quiz"></div>
+<div class="actionrow"><button id="checkQuiz">Vyhodnotit</button><button class="secondary" id="resetQuiz">Nový pokus</button><span id="quizScore" aria-live="polite"></span></div>
+</div>
+<details><summary>Co si zapamatovat (stručné shrnutí)</summary>
+<p><strong>A<sub>r</sub></strong> a <strong>M<sub>r</sub></strong> porovnávají hmotnosti částic a nemají jednotku. <strong>n</strong> měříme v molech; jeden mol obsahuje N<sub>A</sub> částic. <strong>M<sub>m</sub></strong> je hmotnost 1 molu. <strong>V<sub>m</sub></strong> je objem 1 molu za daných podmínek.</p>
+<p><strong>Nejdůležitější vztah:</strong> n = N/N<sub>A</sub> = m/M<sub>m</sub> = V/V<sub>m</sub>.</p></details>
+</section>
+<section><h2>Další materiály</h2><p>Navazuje na čtyři lekce z Realisticky.cz:
+<a href="https://www.realisticky.cz/hodina.php?id=311" target="_blank" rel="noopener">Relativní atomová a molekulová hmotnost</a>,
+<a href="https://www.realisticky.cz/hodina.php?id=310" target="_blank" rel="noopener">Molární veličiny I</a>,
+<a href="https://www.realisticky.cz/hodina.php?id=309" target="_blank" rel="noopener">Molární veličiny II</a> a
+<a href="https://www.realisticky.cz/hodina.php?id=307" target="_blank" rel="noopener">Molární veličiny III</a>.
+</p></section>
+</main>
+<footer>2A4 · Fyzika · Relativní hmotnosti a molární veličiny. Přepočty objemů plynů jsou přibližné a vztahují se na normální podmínky.</footer>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const NA = 6.02214076e23, VM = 22.414;
+const fmt = (x,d=4) => new Intl.NumberFormat("cs-CZ",{maximumFractionDigits:d}).format(x);
+const supMap={"-":"⁻","+":"⁺","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
+function expText(x,d=3){
+ if(!Number.isFinite(x))return "Neplatná hodnota";
+ if(x===0)return "0";
+ const a=Math.abs(x), p=Math.floor(Math.log10(a));
+ if(p>=5||p<=-4)return fmt(x/Math.pow(10,p),d)+" · 10"+String(p).split("").map(c=>supMap[c]||c).join("");
+ return fmt(x,Math.min(d+2,8));
+}
+const molecules={
+ h2o:{atoms:[["H","h"],["O","o"],["H","h"]],text:"2 · 1 + 16 = 18"},
+ co2:{atoms:[["O","o"],["C","c"],["O","o"]],text:"12 + 2 · 16 = 44"},
+ o2:{atoms:[["O","o"],["O","o"]],text:"2 · 16 = 32"},
+ n2:{atoms:[["N","n"],["N","n"]],text:"2 · 14 = 28"}
+};
+function moleculeDraw(){
+ const it=molecules[$("molSelect").value];
+ $("mrText").textContent=it.text;
+ $("molDrawing").replaceChildren(...it.atoms.map(a=>{
+ const s=document.createElement("span");s.className="atom "+a[1];s.textContent=a[0];return s;
+ }));
+}
+$("molSelect").addEventListener("change",moleculeDraw);moleculeDraw();
+function rangeUpdate(){
+ const n=Number($("molRange").value);
+ $("molRangeValue").textContent=fmt(n,2)+" mol";
+ $("molParticleValue").textContent=expText(n*NA,3);
+ $("molWaterValue").textContent=fmt(n*18,2)+" g";
+}
+$("molRange").addEventListener("input",rangeUpdate);rangeUpdate();
+const data={
+ H2O:{M:18.015,type:"molekul",gas:false},
+ Cu:{M:63.55,type:"atomů",gas:false},
+ Hg:{M:200.59,type:"atomů",gas:false},
+ He:{M:4.0026,type:"atomů",gas:true},
+ N2:{M:28.014,type:"molekul",gas:true},
+ O2:{M:31.998,type:"molekul",gas:true},
+ CO2:{M:44.01,type:"molekul",gas:true}
+};
+function calc(){
+ const s=data[$("substance").value], g=$("given"), v=$("givenValue");
+ [...g.options].forEach(o=>{o.disabled=o.value==="V"&&!s.gas;});
+ if(g.value==="V"&&!s.gas)g.value="m";
+ const t=v.value.trim().replace(/\s/g,"").replace(",",".");
+ const x=Number(t);
+ if(!t||!Number.isFinite(x)||x<0){
+ $("calcSteps").textContent="Zadej nezáporné konečné číslo (např. 2,5 nebo 1e9).";
+ ["outNmol","outMass","outParticles","outVolume"].forEach(id=>$(id).textContent="—");
+ return;
+ }
+ let n;
+ switch(g.value){
+ case "N":n=x/NA;break;
+ case "m":n=x/s.M;break;
+ case "V":n=x/VM;break;
+ default:n=x;
+ }
+ const mass=n*s.M, count=n*NA, vol=n*VM;
+ $("outNmol").textContent=expText(n,4)+" mol";
+ $("outMass").textContent=expText(mass,4)+" g";
+ $("outParticles").textContent=expText(count,4)+" "+s.type;
+ $("outVolume").textContent=s.gas?expText(vol,4)+" l":"Pro tuto látku nepoužíváme plynových 22,4 l/mol.";
+ $("calcInfo").textContent="Mₘ = "+fmt(s.M,4)+" g/mol"+(s.gas?"; pro objem se předpokládá ideální plyn při 0 °C a 101 325 Pa.":".")+" Zápis 1e9 znamená 1 · 10⁹.";
+ let step="";
+ if(g.value==="m")step="n = m / Mₘ = "+expText(x,4)+" / "+fmt(s.M,4)+" = "+expText(n,4)+" mol.";
+ else if(g.value==="N")step="n = N / Nₐ = "+expText(x,4)+" / "+expText(NA,4)+" = "+expText(n,4)+" mol.";
+ else if(g.value==="V")step="n = V / Vₘ = "+expText(x,4)+" / "+fmt(VM,3)+" = "+expText(n,4)+" mol.";
+ else step="Zadané látkové množství: n = "+expText(n,4)+" mol.";
+ $("calcSteps").textContent=step+" Potom m = n · Mₘ = "+expText(mass,4)+" g a N = n · Nₐ = "+expText(count,4)+" částic."+(s.gas?" Objem: V = n · Vₘ ≈ "+expText(vol,4)+" l.":"");
+}
+["substance","given","givenValue"].forEach(id=>$(id).addEventListener(id==="givenValue"?"input":"change",calc));calc();
+
+const questions=[
+ {q:"Která veličina nemá jednotku?",a:["Molární hmotnost Mₘ","Relativní atomová hmotnost Aᵣ","Avogadrova konstanta Nₐ"],c:1,why:"Aᵣ je podíl dvou hmotností."},
+ {q:"Kolik částic je přibližně v 1 molu látky?",a:["6,02 · 10²³","22,4","1,66 · 10⁻²⁷"],c:0,why:"Počet určuje Avogadrova konstanta."},
+ {q:"Co znamená molární hmotnost?",a:["Hmotnost jednoho atomu","Hmotnost 1 molu látky","Počet molů v jednom kilogramu"],c:1,why:"Mₘ = m/n."},
+ {q:"Jaká je Mᵣ vody H₂O, vezmeme-li H = 1 a O = 16?",a:["17","18","32"],c:1,why:"2 · 1 + 16 = 18."},
+ {q:"Jak se vypočítá látkové množství ze známé hmotnosti?",a:["n = m · Mₘ","n = m / Mₘ","n = Mₘ / m"],c:1,why:"m i Mₘ musí být ve vzájemně odpovídajících jednotkách."},
+ {q:"Kdy má ideální plyn molární objem asi 22,4 l/mol?",a:["Při libovolné teplotě","Při 0 °C a 101 325 Pa","Jen když jde o kyslík"],c:1,why:"Jde o normální fyzikální podmínky."},
+ {q:"Mají jeden mol vody a jeden mol mědi stejný počet částic?",a:["Ano","Ne, měď má více","Ne, voda má více"],c:0,why:"V jednom molu je stejný počet částic, liší se jejich druh a hmotnost."},
+ {q:"Relativní atomová hmotnost uhlíku je zhruba 12,01. Jaká je jeho molární hmotnost?",a:["12,01 kg/mol","12,01 g/mol","12,01 mol/g"],c:1,why:"Číselná hodnota v g/mol odpovídá Aᵣ."},
+ {q:"Kolik molů představuje 36 g vody, jestliže Mₘ = 18 g/mol?",number:2,tol:0.0001,why:"n = 36 / 18 = 2 mol."},
+ {q:"Jaký objem v litrech zaujmou přibližně 2 moly ideálního plynu za normálních podmínek?",number:44.8,tol:0.1,why:"V = 2 · 22,4 = 44,8 l."}
+];
+function renderQuiz(){
+ const parent=$("quiz");parent.replaceChildren();
+ questions.forEach((q,i)=>{
+ const f=document.createElement("fieldset"),legend=document.createElement("legend");legend.textContent=(i+1)+". "+q.q;f.append(legend);
+ if(q.a){q.a.forEach((answer,j)=>{
+ const l=document.createElement("label");l.className="choice";
+ const input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=String(j);
+ l.append(input,document.createTextNode(answer));f.append(l);
+ });}
+ else{const inp=document.createElement("input");inp.type="text";inp.inputMode="decimal";inp.placeholder="Napiš jedno číslo";inp.id="numeric"+i;inp.setAttribute("aria-label","Číselná odpověď na otázku "+(i+1));f.append(inp);}
+ const status=document.createElement("p");status.id="fb"+i;status.className="question-result";status.setAttribute("aria-live","polite");f.append(status);parent.append(f);
+ });
+ $("quizScore").textContent="";
+}
+function checkQuiz(){
+ let correct=0;
+ questions.forEach((q,i)=>{
+ let ok=false;const fb=$("fb"+i);
+ if(q.a){const sel=document.querySelector('input[name="q'+i+'"]:checked');ok=!!sel&&Number(sel.value)===q.c;}
+ else{const text=$("numeric"+i).value.trim().replace(",",".");const value=Number(text);ok=text!==""&&Number.isFinite(value)&&Math.abs(value-q.number)<=q.tol;}
+ if(ok)correct++;
+ fb.textContent=(ok?"✓ Správně. ":"✗ "+(q.a?"Správná odpověď: "+q.a[q.c]+". ":"Správná odpověď: "+fmt(q.number,2)+". "))+q.why;
+ fb.className="question-result "+(ok?"good":"bad");
+ });
+ $("quizScore").textContent="Správně: "+correct+" z "+questions.length;
+}
+$("checkQuiz").addEventListener("click",checkQuiz);
+$("resetQuiz").addEventListener("click",renderQuiz);
+renderQuiz();
+</script>
+</body>
+</html>
